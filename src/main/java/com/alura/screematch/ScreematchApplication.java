@@ -1,5 +1,6 @@
 package com.alura.screematch;
 
+import com.alura.screematch.model.datoSerie;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -32,5 +33,10 @@ public class ScreematchApplication implements CommandLineRunner {
 
         var json = consumible.obtenerDatos(direccion);
         System.out.println(json);
+
+        ConvierteDatos conversor =  new ConvierteDatos();
+
+        var datos = conversor.obtenerClase(json, datoSerie.class);
+        System.out.println(datos);
     }
 }
