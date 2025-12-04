@@ -24,9 +24,11 @@ public class ScreematchApplication implements CommandLineRunner {
         //var busqueda = leer.nextLine();
 
         //String direccion = "https://www.omdbapi.com/?t="+busqueda+"&apikey=d31d9f71";
-       // String direccion = "https://www.omdbapi.com/?t=breaking%20bad&apikey=d31d9f71";
+
 
         var consumible = new consumoAPI();
+
+        String direccion = consumoAPI.getApiUrl();
 
         var json = consumible.obtenerDatos(direccion);
         System.out.println(json);
