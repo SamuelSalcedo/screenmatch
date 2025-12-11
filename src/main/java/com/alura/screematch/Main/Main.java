@@ -44,9 +44,10 @@ public class Main {
             temporadas.add(temporadaActual);
         }
 
-        temporadas.forEach(System.out::println);
+       // temporadas.forEach(System.out::println);
 
-
+        //funcion lambda para simplificar los episodios
+        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())) );
     }
 
 }
