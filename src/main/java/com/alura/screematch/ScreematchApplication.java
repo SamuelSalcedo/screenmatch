@@ -1,11 +1,16 @@
 package com.alura.screematch;
 
+import com.alura.screematch.Main.Main;
 import com.alura.screematch.model.datoSerie;
+import com.alura.screematch.model.datosEpisodio;
+import com.alura.screematch.model.datosTemporadas;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.alura.screematch.service.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 @SpringBootApplication
@@ -19,24 +24,7 @@ public class ScreematchApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         System.out.println("HOLA WE");
-        Scanner leer = new Scanner(System.in);
-
-        System.out.println("Ingresa el nombre de la serie que buscas: \n");
-        //var busqueda = leer.nextLine();
-
-        //String direccion = "https://www.omdbapi.com/?t="+busqueda+"&apikey=d31d9f71";
-
-
-        var consumible = new consumoAPI();
-
-        String direccion = consumoAPI.getApiUrl();
-
-        var json = consumible.obtenerDatos(direccion);
-        System.out.println(json);
-
-        ConvierteDatos conversor =  new ConvierteDatos();
-
-        var datos = conversor.obtenerClase(json, datoSerie.class);
-        System.out.println(datos);
+        Main principal = new Main();
+        principal.mostrarMenu();
     }
 }
