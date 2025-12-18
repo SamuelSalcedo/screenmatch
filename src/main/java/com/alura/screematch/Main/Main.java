@@ -1,6 +1,7 @@
 package com.alura.screematch.Main;
 
 import com.alura.screematch.model.datoSerie;
+import com.alura.screematch.model.datosEpisodio;
 import com.alura.screematch.model.datosTemporadas;
 import com.alura.screematch.service.ConvierteDatos;
 import com.alura.screematch.service.consumoAPI;
@@ -8,10 +9,8 @@ import com.alura.screematch.service.consumoAPI;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Main {
 
@@ -47,7 +46,22 @@ public class Main {
        // temporadas.forEach(System.out::println);
 
         //funcion lambda para simplificar los episodios
-        temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())) );
+        //temporadas.forEach(t -> t.episodios().forEach(e -> System.out.println(e.titulo())) );
+
+        //Crea una lista con los datos mapeados del episodio de la lista de temporadas y recorre esta lista hasta sacar todos los episodios
+        List<datosEpisodio> datosEpisodios = temporadas.stream()
+                 .flatMap(t -> t.episodios().stream())
+                 .collect(Collectors.toList());
+
+        datosEpisodios.stream()
+                .filter(e -> !e.evaluacion().equalsIgnoreCase("N/A"))
+                .sorted(Comparator.comparing(datosEpisodio::evaluacion).reversed())
+                .limit(5)
+                .forEach(System.out::println);
+
+
+
+
     }
 
 }
