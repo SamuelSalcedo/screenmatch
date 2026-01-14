@@ -3,6 +3,7 @@ package com.alura.screematch.Main;
 import com.alura.screematch.model.datoSerie;
 import com.alura.screematch.model.datosEpisodio;
 import com.alura.screematch.model.datosTemporadas;
+import com.alura.screematch.model.episodio;
 import com.alura.screematch.service.ConvierteDatos;
 import com.alura.screematch.service.consumoAPI;
 
@@ -58,6 +59,14 @@ public class Main {
                 .sorted(Comparator.comparing(datosEpisodio::evaluacion).reversed())
                 .limit(5)
                 .forEach(System.out::println);
+
+        //convertir los datos recopilados a una lista de tipo Episodio
+        List<episodio> episodios = temporadas.stream()
+                .flatMap(t ->t.episodios().stream()
+                        .map(d -> new episodio(t.numero(),d)))
+                .collect(Collectors.toList());
+
+        episodios.forEach(System.out::println);
 
 
 
