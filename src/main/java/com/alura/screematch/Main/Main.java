@@ -10,6 +10,8 @@ import com.alura.screematch.service.consumoAPI;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -68,8 +70,21 @@ public class Main {
 
         episodios.forEach(System.out::println);
 
+        System.out.println("de que anios los quieres ?");
 
+        var fecha = entrada.nextInt();
+        entrada.nextLine();
 
+        LocalDate fechaBusqueda = LocalDate.of(fecha, 1, 1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        episodios.stream()
+                .filter(e -> e.getFechaLanzamiento() != null && e.getFechaLanzamiento().isAfter(fechaBusqueda))
+                .forEach(e -> System.out.println(
+                        "Temporada: " + e.getTemporada() +
+                                " Episodio: " + e.getTitulo() +
+                                " Fecha de Lanzamiento: " + e.getFechaLanzamiento().format(formatter)
+                ));
 
     }
 
